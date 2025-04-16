@@ -2,7 +2,7 @@
 
 import userEventModel from "../model/userEvent.js";
 
-export async function getUserEvent(req,req){
+export async function getUserEvent(req,res){
     try {
         const userEvents = await userEventModel.getUserEvent();
         res.status(200).json(userEvents);
