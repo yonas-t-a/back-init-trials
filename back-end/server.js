@@ -8,7 +8,6 @@ import userEventRoute from './routers/api/userEventRoute.js';
 import userRoute from './routers/api/userRoute.js';
 // import authRoute from './routers/api/authRoute.js';
 import eventRoute from './routers/api/eventRoute.js';
-import adminRoute from './routers/api/adminRoute.js';
 
 
 
@@ -35,10 +34,9 @@ app.use('/api/userEvents', userEventRoute);
 app.use('/api/users', userRoute);
 // app.use('/api/auth', authRoute);
 app.use('/api/events', eventRoute);
-app.use('/api/admin', adminRoute);
 
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-}
+        console.log(`Server is running on port ${PORT}`);
+    }
 );

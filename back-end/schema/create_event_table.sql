@@ -6,8 +6,6 @@ CREATE TABLE IF NOT EXISTS event(
     event_time TIME NOT NULL,
     event_location VARCHAR(255) NOT NULL,
     event_category VARCHAR(100) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     creator_id INT,
     event_status BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (creator_id) REFERENCES admin(admin_id)

@@ -36,7 +36,6 @@ export const setUpDatabase = async () => {
 
         const sqlFileNames = [
             "create_user_table.sql",
-            "create_admin_table.sql",
             "create_article_table.sql",
             "create_event_table.sql",
             "create_user_event_table.sql",
