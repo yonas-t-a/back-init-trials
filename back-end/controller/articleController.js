@@ -1,4 +1,5 @@
 import articleModel from "../model/article.js";
+import path from 'path';
 
 export async function getArticle(req, res) {
     try {
@@ -21,12 +22,13 @@ export async function getArticleById(req, res) {
     }
 }
 export async function createArticle(req, res) {
-    // Validate the request body 
-    // img is optional
-    const { title, content, category, img } = req.body;
+    const { title, content, category } = req.body;
+    const img = req.file ? `/images/${req.file.filename}` : null; // Get the uploaded image path
+
     if (!title || !content || !category) {
         return res.status(400).json({ error: "All fields are required" });
     }
+
     try {
         const newArticle = { title, content, category, img };
         const result = await articleModel.createArticle(newArticle);
@@ -36,12 +38,14 @@ export async function createArticle(req, res) {
     }
 }
 export async function updateArticle(req, res) {
-    // Validate the request body
     const { id } = req.params;
-    const { title, content, category, img } = req.body;
+    const { title, content, category } = req.body;
+    const img = req.file ? `/images/${req.file.filename}` : null; // Get the uploaded image path
+
     if (!title || !content || !category) {
         return res.status(400).json({ error: "All fields are required" });
     }
+
     try {
         const updatedArticle = { title, content, category, img };
         const result = await articleModel.updateArticle(id, updatedArticle);

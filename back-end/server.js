@@ -9,6 +9,9 @@ import userRoute from './routers/api/userRoute.js';
 import authRoute from './routers/api/authRoute.js';
 import eventRoute from './routers/api/eventRoute.js';
 
+import cors from 'cors';
+
+
 
 
 const app = express();
@@ -17,6 +20,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
+app.use('/images', express.static('public/images'));
+
 
 // database connection
 setUpDatabase()

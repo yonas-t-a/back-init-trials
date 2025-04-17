@@ -24,6 +24,14 @@ const userModel = {
     async deleteUser(id) {
         const [result] = await pool.query('DELETE FROM user WHERE user_id = ?', [id]);
         return result;
+    },
+    async getUserByEmail(email) {
+        const [rows] = await pool.query('SELECT * FROM user WHERE email = ?', [email]);
+        return rows[0];
+    },
+    async getUserByUsername(username) {
+        const [rows] = await pool.query('SELECT * FROM user WHERE username = ?', [username]);
+        return rows[0];
     }
 };
 export default userModel;

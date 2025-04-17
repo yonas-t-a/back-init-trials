@@ -9,6 +9,7 @@ import {
 } from '../../controller/articleController.js';
 
 import { authenticate, authorizeRoles } from '../../middleware/authMiddleware.js';
+import upload from '../../middleware/uploadMiddleware.js';
 
 const router = express.Router();
 
@@ -18,11 +19,11 @@ router.route('/')
 
 // Admin-only routes
 router.route('/')
-    .post(authenticate, authorizeRoles('admin'), createArticle);
+    .post(authenticate, authorizeRoles('admin'), upload.single('img'), createArticle);
 
 router.route('/:id')
     .get(authenticate, getArticleById)
-    .put(authenticate, authorizeRoles('admin'), updateArticle)
+    .put(authenticate, authorizeRoles('admin'), upload.single('img'), updateArticle)
     .delete(authenticate, authorizeRoles('admin'), deleteArticle);
 
 // Public route: filter articles by category
