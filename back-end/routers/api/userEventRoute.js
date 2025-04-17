@@ -7,14 +7,18 @@ import {
   deleteUserEvent
 } from '../../controller/userEventController.js';
 
+import { authenticate } from '../../middleware/authMiddleware.js';
+
 const router = express.Router();
+
+// All routes are protected — only logged-in users can use them
 router.route('/')
-    .get(getUserEvent)
-    .post(createUserEvent);
+    .get(authenticate, getUserEvent) 
+    .post(authenticate, createUserEvent);
 
 router.route('/:id')
-    .get(getUserEventById)
-    .put(updateUserEvent)
-    .delete(deleteUserEvent);
+    .get(authenticate, getUserEventById) 
+    .put(authenticate, updateUserEvent) 
+    .delete(authenticate, deleteUserEvent);
 
 export default router;

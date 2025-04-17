@@ -10,22 +10,28 @@ import {
   getEventByLocation
 } from '../../controller/eventController.js';
 
+import { authenticate, authorizeRoles } from '../../middleware/authMiddleware.js';
+
 const router = express.Router();
 
+// Public: All users can view events
 router.route('/')
     .get(getEvent) 
-    .post(createEvent); 
+    .post(authenticate, authorizeRoles('admin'), createEvent); // Only admin
 
 router.route('/:id')
     .get(getEventById) 
-    .put(updateEvent) 
-    .delete(deleteEvent); 
+    .put(authenticate, authorizeRoles('admin'), updateEvent)   // Only admin
+    .delete(authenticate, authorizeRoles('admin'), deleteEvent); // Only admin
 
 router.route('/category/:category')
-    .get(getEventByCategory);
+    .get(getEventByCategory); // All user
+
 router.route('/date/:date')
-    .get(getEventByDate); 
+    .get(getEventByDate); // All user
+
 router.route('/location/:location')
-    .get(getEventByLocation); 
+    .get(getEventByLocation); // All user
 
 export default router;
+
